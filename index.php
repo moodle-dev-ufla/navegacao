@@ -41,7 +41,12 @@ foreach ($categories as $cat) {
     $numofcourses = $DB->count_records(
         'course', array('visible'=>'1', 'category'=>$cat->id));
 
-    $table->data[] = array($cat->name, $numofcourses);
+    $table->data[] = array(
+        html_writer::link(
+            $CFG->wwwroot . '/report/navegacao/courses.php?categoryId=' . $cat->id, 
+            $cat->name
+        ), 
+        $numofcourses);
 }
 
 echo html_writer::table($table);
